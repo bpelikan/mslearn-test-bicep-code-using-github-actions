@@ -6,6 +6,10 @@ on:
     branches: 
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
 env:
   AZURE_RESOURCEGROUP_NAME: ToyWebsiteTest
   ENVIRONMENT_TYPE: Test
@@ -22,9 +26,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: azure/login@v1
-      name: Sign in to Azure
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     - uses: azure/arm-deploy@v1
       name: Run preflight validation
       with:
@@ -39,9 +44,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: azure/login@v1
-      name: Sign in to Azure
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     - uses: azure/arm-deploy@v1
       name: Run what-if
       with:
@@ -60,9 +66,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: azure/login@v1
-      name: Sign in to Azure
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     - uses: azure/arm-deploy@v1
       name: Deploy website
       id: deploy
