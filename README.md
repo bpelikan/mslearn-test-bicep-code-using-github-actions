@@ -51,7 +51,7 @@ az ad app federated-credential create \
 
 
 # Create a resource group in Azure and grant the workload identity access
-resourceGroupResourceId=$(az group create --name ToyWebsiteTest --location westus --query id --output tsv)
+resourceGroupResourceId=$(az group create --name ToyWebsiteTest --location westeurope --query id --output tsv)
 
 az ad sp create --id $applicationRegistrationObjectId
 az role assignment create \
